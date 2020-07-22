@@ -56,9 +56,13 @@ that i have started to develop this Module. (even though I am very bad in gramma
 
 So the first bunch of Formating functions of this Module are processing PowerShell sourcecode for casing.
 
-Secondly there are planned a bunch of functions to place braces.
+### Roadmap
 
-and after that, there are plans to write some functions to ident and correct whitespace.
+- a bunch of functions to place braces (and space between them).
+
+- replace aliases with the names who points the alias to (command alias and ParameterName alias or shorts)
+
+- write some functions to ident the code and to correct other whitespace.
 
 ## Main Functions of this Module
 
@@ -93,6 +97,13 @@ Format-BopCasingTypeMemberName
 #### Brace placement
 
 Format-BopLCurly
+
+## Insights
+
+In this Module the Tokens parsed from PowerShell sourcecode are the first citizen.
+The Tokens are handled as a Stream (of Tokens)
+
+For more insights, read the sourcecode of the Module and functions and see documents in folder Doc!
 
 ## Credits
 

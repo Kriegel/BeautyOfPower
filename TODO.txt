@@ -1,0 +1,15 @@
+. Register-ArgumentCompleter
+. map Tokens to AST
+. Get-BopToken; Change standard behavior to allways expand Nested Tokens!
+. New-BopToken create .NET Objects no PsObjects to speed up the object creation
+. Format-BopCasingAttributeName; Do we need Namspaces for Attributes ?
+. Correct casing for scopeID "Global","Local" oder "Script"
+. Format-BopLCurly; Do{}While()  has not LCurly !!!!!
+. Format-BopLCurly; Class Constructors !?
+. make $BopCommandHashList type of [System.Collections.Generic.Dictionary[String],[System.Collections.ArrayList]]
+
+Nice to have 
+------------------
+
+. Expand Typenames to FullName ??
+. make all operators expicit case sensitiv (cahange -Like to -iLike etc.)

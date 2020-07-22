@@ -1,0 +1,2 @@
+$Name = "ωωω"
+"Hello, $Name"

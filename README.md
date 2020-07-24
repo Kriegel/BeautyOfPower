@@ -32,7 +32,6 @@ Format-BopCasingAttributeName |
 Format-BopCasingKeyword -ToLower |
 Format-BopCasingCommandName |
 Format-BopCasingParameter |
-Format-BopLCurly -LCurlyOnNewLine|
 Format-BopCasingTypeMemberName |
 Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
 # Function to define the place of the opening brace (LCurly) (here on their own line)

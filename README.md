@@ -1,5 +1,5 @@
 # BeautyOfPower
-PowerShell Module to beautify sourcecode and to do refactoring on PowerShell Code
+PowerShell Module to beautify sourcecode and to do refactoring on PowerShell sourcecode
 
 ## Usage
 
@@ -29,10 +29,12 @@ ConvertTo-BopToken |
 # Function which correct the casing of the Tokens
 Format-BopCasingTypeName |
 Format-BopCasingAttributeName |
-Format-BopCasingKeyword |
+Format-BopCasingKeyword -ToLower |
 Format-BopCasingCommandName |
 Format-BopCasingParameter |
+Format-BopLCurly -LCurlyOnNewLine|
 Format-BopCasingTypeMemberName |
+Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
 # Function to define the place of the opening brace (LCurly) (here on their own line)
 Format-BopLCurly -LCurlyOnNewLine |
 ForEach-Object {
@@ -49,7 +51,7 @@ Notepad.exe $OutFilePath
 
 ## Description
 
-I an developing this Module to prettify PowerShell sourcecode, downloaded from the Internet.
+I am developing this Module to prettify PowerShell sourcecode, downloaded from the Internet.
 I am a german resident, we germans have imbibe word casing from first day of writing.
 Many coders in the world, do not care about correct casing, this has itched me so much,
 that i have started to develop this Module. (even though I am very bad in grammar)
@@ -85,25 +87,52 @@ The custom Token Object produced by this function are consumed by the formatting
 
 ### Formatting Functions
 
-#### Word casing
+#### Casing
 
-Format-BopCasingTypeName
-Format-BopCasingAttributeName
-Format-BopCasingKeyword
-Format-BopCasingCommandName
-Format-BopCasingParameter
-Format-BopCasingTypeMemberName
+- Format-BopCasingTypeName
+
+- Format-BopCasingAttributeName
+
+- Format-BopCasingKeyword (uses PascalCase by default!)
+
+- Format-BopCasingCommandName
+
+- Format-BopCasingParameter
+
+- Format-BopCasingTypeMemberName
+
+- Format-BopCasingKnownVariables (uses PascalCase by default!)
+
+Watchout for additional Parameters a Function servers.
+This can be used to change casing behavior
+
+See also: Capitalization guidelines
+<https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/36>
 
 #### Brace placement
 
-Format-BopLCurly
+- Format-BopLCurly (Kernighan & Ritchie Style and Allman style)
+
 
 ## Insights
 
-In this Module the Tokens parsed from PowerShell sourcecode are the first citizen.
+In this Module the Tokens parsed from PowerShell sourcecode are the first class citizen.
 The Tokens are handled as a Stream (of Tokens)
 
 For more insights, read the sourcecode of the Module and functions and see documents in folder Doc!
+
+## Informations about Formating PowerShell Code
+
+Windows PowerShell Language Specification Version 3.0
+(download as Word document .docx Year 2012)
+<https://www.microsoft.com/en-us/download/details.aspx?id=36389>
+
+Powershell Practice and Style recomendations
+<https://poshcode.gitbooks.io/powershell-practice-and-style/>
+
+Known Issues for PowerShell 6.0
+Case-sensitivity in PowerShell etc. ...
+<https://docs.microsoft.com/en-us/powershell/scripting/whats-new/known-issues-ps6>
 
 ## Credits
 
@@ -112,7 +141,9 @@ Credits goes to:
 Tobias Welter
 
 <https://github.com/TobiasPSP/Modules.PSOneTools>
+
 <https://powershell.one/powershell-internals/parsing-and-tokenization/advanced-tokenizer>
+
 <https://powershell.one/powershell-internals/parsing-and-tokenization/abstract-syntax-tree>
 
 Dan Ward

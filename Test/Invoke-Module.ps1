@@ -1,4 +1,4 @@
-Import-Module $PSScriptRoot -Force
+Import-Module "$PSScriptRoot\..\BeautyOfPower" -Force
 
 # $Code = @'
 # {{(({()}))}}
@@ -11,7 +11,7 @@ Import-Module $PSScriptRoot -Force
 
 
 # # #$ParsePath = "$PSScriptRoot\Test\Files-ToParse\EditAndParseMe.ps1" # Parse Edit File
-$ParsePath = "$PSScriptRoot\Test\Files-ToParse\Bad-Scripts\Function-Complete-lowercase.ps1"
+$ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\Function-Complete-lowercase.ps1"
  #$ParsePath = "$PSScriptRoot\Test\Files-ToParse\Bad-Scripts\Function-Complete-lowercase-LCurlyOnSameLine.ps1"
 
  # get Ast elements
@@ -25,17 +25,18 @@ Get-BopTokenAndAst -Path $ParsePath -IncludeNestedToken |
 ConvertTo-BopToken |
 Format-BopCasingTypeName |
 Format-BopCasingAttributeName |
-Format-BopCasingKeyword |
+Format-BopCasingKeyword -ToLower |
 Format-BopCasingCommandName |
 Format-BopCasingParameter |
-Format-BopLCurly |
+Format-BopLCurly -LCurlyOnNewLine|
 Format-BopCasingTypeMemberName |
+Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
 ForEach-Object {
     $Token = $_
 
-    # If($Token.Text  -eq 'defaultparametersetname') {
-    #     #$Token
-    #     $Ast = Get-BopAstFromToken $Token
+    # If($Token.Kind  -eq [System.Management.Automation.Language.TokenKind]::Variable) {
+    #     $Token.Text
+    #     #$Ast = Get-BopAstFromToken $Token
 
     # }
 

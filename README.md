@@ -36,6 +36,8 @@ Format-BopCasingTypeMemberName |
 Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
 # Function to define the place of the opening brace (LCurly) (here on their own line)
 Format-BopLCurly -LCurlyOnNewLine |
+# expanding Alias
+Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll |
 ForEach-Object {
 
     # Writing the processed Tokens one after the other to the output file and add spaces between the Tokens

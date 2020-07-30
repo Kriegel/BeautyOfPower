@@ -1,4 +1,8 @@
 Function Get-BopTypeMemberNames {
+<#
+    TODO: Process ALL current loaded assemblies not only the well known.
+#>
+
 
     [CmdletBinding()]
     Param()

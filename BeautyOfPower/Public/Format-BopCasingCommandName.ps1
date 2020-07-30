@@ -100,8 +100,8 @@ Function Format-BopCasingCommandName {
                     # TODO: Write better handling here
                     ForEach ($Cmd in $BopCommandName.MultipleValues) {
                         Write-Warning "$($PSCmdlet.MyInvocation.MyCommand.Name); Command has multiple equivalents! '$($Tok.Text)' has equivalent $($Cmd.Name) with CommandType $($Cmd.CommandType) Source $($Cmd.Source)"
-                        Write-Output $Tok
                     }
+                    Write-Output $Tok
                 }
             }
         }

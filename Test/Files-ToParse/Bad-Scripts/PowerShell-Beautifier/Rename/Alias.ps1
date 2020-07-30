@@ -6,6 +6,10 @@ type c:\temp\asdf.txt
 
 del c:\temp\asdf.txt
 
+iex "I want to use alias"
+
+cls
+
 Get-ChildItem | where { $_.Extension -eq '.txt' }
 
 # list all known aliases to find what is missing

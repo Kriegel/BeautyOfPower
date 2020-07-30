@@ -11,7 +11,8 @@ Import-Module "$PSScriptRoot\..\BeautyOfPower" -Force
 
 
 # # #$ParsePath = "$PSScriptRoot\Test\Files-ToParse\EditAndParseMe.ps1" # Parse Edit File
-$ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\Function-Complete-lowercase.ps1"
+# $ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\Function-Complete-lowercase.ps1"
+$ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\PowerShell-Beautifier\Rename\Alias.ps1"
  #$ParsePath = "$PSScriptRoot\Test\Files-ToParse\Bad-Scripts\Function-Complete-lowercase-LCurlyOnSameLine.ps1"
 
  # get Ast elements
@@ -23,14 +24,15 @@ $Null = New-Item $TestFilePath -ItemType File -Force
 
 Get-BopTokenAndAst -Path $ParsePath -IncludeNestedToken |
 ConvertTo-BopToken |
-Format-BopCasingTypeName |
-Format-BopCasingAttributeName |
-Format-BopCasingKeyword -ToLower |
-Format-BopCasingCommandName |
-Format-BopCasingParameter |
-Format-BopLCurly -LCurlyOnNewLine|
-Format-BopCasingTypeMemberName |
-Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
+# Format-BopCasingTypeName |
+# Format-BopCasingAttributeName |
+# Format-BopCasingKeyword -ToLower |
+# Format-BopCasingCommandName |
+# Format-BopCasingParameter |
+# Format-BopLCurly -LCurlyOnNewLine|
+# Format-BopCasingTypeMemberName |
+# Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
+Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll |
 ForEach-Object {
     $Token = $_
 

@@ -21,7 +21,7 @@ Function Format-BopExpandCommandAlias {
     This poses significant issues in the likely scenario where a script was edited
     on one OS but is then being processed with this Function on an other OS.
 
-    List of Alias that are NOT expanded by default:
+    List of Alias that are excluded and NOT expanded by default:
 
         ac, asnp, cat, CFS, compare, cp, cpp, curl, diff, epsn, gcb, gin, gsnp,
         gsv, gwmi, ipsn, ise, iwmi, lp, ls, man, mount, mv, npssc, ogv, ps, rm,
@@ -30,6 +30,11 @@ Function Format-BopExpandCommandAlias {
 
 .EXAMPLE
 
+    Get-BopTokenAndAst -Path 'C:\PsCode\TestFile.ps1' -IncludeNestedToken | ConvertTo-BopToken | Format-BopExpandCommandAlias
+
+.EXAMPLE
+
+    Get-BopTokenAndAst -Path 'C:\PsCode\TestFile.ps1' -IncludeNestedToken | ConvertTo-BopToken | Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll
 
 .NOTES
     Author: Peter Kriegel
@@ -47,8 +52,10 @@ Function Format-BopExpandCommandAlias {
         [ValidateNotNullOrEmpty()]
         [PsObject]$BopToken,
 
+        # processing each Alias case sensitiv, the default is to find the Alias to expand case insensitive
         [Switch]$CaseSensitiv,
 
+        # Including the excluded Alias names
         [Switch]$IncludeAll
     )
 

@@ -42,6 +42,7 @@ ConvertTo-BopToken |
 # Chain the Formating functions to process the tokens
 #
 # Functions which correct the casing of the Tokens
+#
 Format-BopCasingTypeName |
 Format-BopCasingAttributeName |
 Format-BopCasingKeyword -ToLower |
@@ -49,19 +50,22 @@ Format-BopCasingCommandName |
 Format-BopCasingParameter |
 Format-BopCasingTypeMemberName |
 Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
+#
 # Function to define the place of the opening brace (LCurly) (here on their own line)
+#
 Format-BopLCurly -LCurlyOnNewLine |
-# expanding Alias
+#
+# Function to expand Command-Alias
+#
 Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll |
-# Functions to process Command parameters
+#
+# Functions to process Command ParameterNames
+#
 # Command Parameter casing
 Format-BopCasingParameter | # alternativly use : Format-BopParameter -Format 'Casing'
-#
-# Parameter Formatting and Adding
-#
 # Shortened Command Parameter expanding
 Format-BopExpandParameterShort | # alternativly use : Format-BopParameter -Format 'ExpandShort'
-# Convert Command Parameter Alias to real Parameter Name
+# Convert Command Parameter-Alias to real Parameter Name
 Format-BopExpandParameterAlias  | # alternativly use : Format-BopParameter -Format 'ExpandAlias'
 # alternativly to the single functions, you can use : Format-BopParameter -Format 'All'
 #

@@ -3,7 +3,7 @@
 ## Very good PowerShell code parsing blog articles
 
 Since PowerShell 3.0 code parsing you can go 2 ways to parse the code.
-(with use of the same one .NET Class 'System.Management.Automation.Language.Parser')
+(with use of the same .NET Class 'System.Management.Automation.Language.Parser')
 
 - Tokenize
 - AST (Abstract Syntax Tree)
@@ -40,11 +40,15 @@ Case-sensitivity in PowerShell etc. ...
 
 ### Informations to single items
 
+#### Type Accelerators
+
 Understanding Type Accelerators (Part 1)
 <https://community.idera.com/database-tools/powershell/powertips/b/tips/posts/understanding-type-accelerators-part-1>
 ```powershell
 [PSObject].Assembly.GetType('System.Management.Automation.TypeAccelerators')::Get
 ```
+
+#### Command Parameters
 
 Get Informations about Cmdlet Parameters
 The Cmdlet Parameters are nested (accidentally) as Hashtable in an Hashtable
@@ -56,6 +60,12 @@ ForEach($Key in $Dict.Keys) {
     $Dict[$Key]
 }
 ```
+
+A very useful Function to get informations about command Parameters can be found in the PowerShell Gallery, called "Get-Parameter" :
+<https://www.powershellgallery.com/packages/Get-Parameter/2.9>
+
+#### Casing
+
 TextInfo.ToTitleCase() Method is to Capitalize the first letter of each word
 TextInfo can be found in the CultureInfo Object
 ```powershell
@@ -67,7 +77,7 @@ $TextInfo.ToTitleCase('hello')
 About Automatic Variables
 <https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7>
 
-Curly Braces
+#### Curly Braces (Style)
 
 There is no One True Brace Style
 <https://github.com/PoshCode/PowerShellPracticeAndStyle/issues/81>

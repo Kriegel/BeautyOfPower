@@ -58,6 +58,7 @@ Function Get-BopTokenAndAst {
 
     # include nested token that are contained inside
     # ExpandableString tokens
+    # IT IS STRONGLY NOT RECOMENDED TO USE THIS IN REFACTORING, THIS WILL DAMAGE THE CODE!
     [Switch]
     $IncludeNestedToken
 

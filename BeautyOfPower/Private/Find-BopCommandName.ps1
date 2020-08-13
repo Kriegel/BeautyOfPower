@@ -32,6 +32,7 @@ Function Find-BopCommandName {
             EquivalentFound = $false
             IsCasingEqual = $false
             IsWindows = ($env:OS -iLike '*Windows*')
+            CommandInfo = $null
             MultipleValues = @()
         }
 
@@ -49,6 +50,7 @@ Function Find-BopCommandName {
                 $ResultObject.Surrogate = $CmdList[0].Name
                 $ResultObject.IsCasingEqual = $true
                 $ResultObject.EquivalentFound = $true
+                $ResultObject.CommandInfo = $CmdList[0]
 
                 Return $ResultObject
             }
@@ -67,6 +69,7 @@ Function Find-BopCommandName {
                 $ResultObject.Surrogate = $CmdList[0].Name
                 $ResultObject.IsCasingEqual = $false
                 $ResultObject.EquivalentFound = $true
+                $ResultObject.CommandInfo = $CmdList[0]
 
                 Return $ResultObject
             }

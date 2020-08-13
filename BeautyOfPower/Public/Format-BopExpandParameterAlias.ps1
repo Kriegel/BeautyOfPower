@@ -1,10 +1,10 @@
-Function Format-BopCasingParameter {
+Function Format-BopExpandParameterAlias {
 <#
 .SYNOPSIS
-    Format PowerShell Parameter Token with TokenKind 'Parameter' to have an uniform casing
+    Format PowerShell Parameter Token with TokenKind 'Parameter' to expand a Parameter Alias
 
 .DESCRIPTION
-    Format PowerShell Parameter Token with TokenKind 'Parameter' to have an uniform casing
+    Format PowerShell Parameter Token with TokenKind 'Parameter' to expand a Parameter Alias
 
     Processes only the Token with TokenKind 'Parameter'.
 
@@ -50,7 +50,7 @@ Function Format-BopCasingParameter {
                 Throw "$MyCommandName; Parameter -BopToken has wrong Type!"
             }
 
-            Format-BopParameter -BopToken $BopToken -Format 'Casing'
+            Format-BopParameter -BopToken $BopToken -Format 'ExpandAlias'
 
         }
         Catch {

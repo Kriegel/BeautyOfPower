@@ -1,16 +1,32 @@
-. Register-ArgumentCompleter
-. map Tokens to AST
+. Register-ArgumentCompleter (see Tobias Weltner)
+. better mapping of Tokens to AST
 . Get-BopToken; Change standard behavior to allways expand Nested Tokens!
 . New-BopToken create .NET Objects no PsObjects to speed up the object creation
 . Format-BopCasingAttributeName; Do we need Namspaces for Attributes ?
 . Correct casing for scopeID "Global","Local" oder "Script"
-. Format-BopLCurly; Do{}While()  has not LCurly !!!!!
 . Format-BopLCurly; Class Constructors !?
-. make $BopCommandHashList type of [System.Collections.Generic.Dictionary[String],[System.Collections.ArrayList]]
 . Get-BopTypeMemberNames Process ALL current loaded assemblies not only the well known.
+. convert positional Command Arguments to Named Parameter + Argument
+        Example code to find Parameter Position:
+        ForEach ($Param in (Get-Command Get-ChildItem).Parameters.Values) { $param.ParameterSets.Values | Where { $_.Position -ge 0 } }
+
+. Quotes
+. Correct String double Quotes to Singel Quotes
+. Put Strings (Command Arguments) without quotes into Single Quotes
+. Set ErrorAction to Ignore for calls to Private / Internal Functions where possible
+. Run Code in Sandbox (Function: Get-BopParameterBindingFromInside)
+        https://github.com/damienvanrobaeys/Run-in-Sandbox
+        https://www.ghacks.net/2020/08/09/add-run-in-sandbox-options-on-windows-10/
+
 
 Nice to have 
-------------------
 
 . Expand Typenames to FullName ??
-. make all operators expicit case sensitiv (cahange -Like to -iLike etc.)
+. make all operators expicit case sensitiv (change -Like to -iLike etc.)
+. rewrite Function 'Format-BopAddParameterName' to not rely upon 'Get-BopParameterBindingFromInside'
+
+
+Done !
+------------------
+
+. Format-BopLCurly; Do{}While()  has not LCurly !!!!!

@@ -31,7 +31,9 @@ Function Get-BopAstFromToken {
         # Must be a BopToken
         $Token,
 
-        [String]$AstTypeName
+        [String]$AstTypeName,
+
+        [Switch]$AstOnly
     )
 
     Begin {
@@ -67,14 +69,19 @@ Function Get-BopAstFromToken {
 
                     $AstToken = $_
 
-                    Write-Output ([PsCustomObject]@{
-                        TokenText = $Tok.Text
-                        AstText = $AstToken.Extent.Text
-                        AstType = ($AstToken.GetType().Name)
-                        TokenKind = $Tok.Kind
-                        TokenFlags = $Tok.TokenFlags
-                        Ast = $AstToken
-                    })
+                    If ($AstOnly.IsPresent) {
+                        Write-Output $AstToken
+                    }
+                    Else {
+                        Write-Output ([PsCustomObject]@{
+                            TokenText = $Tok.Text
+                            AstText = $AstToken.Extent.Text
+                            AstType = ($AstToken.GetType().Name)
+                            TokenKind = $Tok.Kind
+                            TokenFlags = $Tok.TokenFlags
+                            Ast = $AstToken
+                        })
+                    }
                 }
             }
         }

@@ -110,7 +110,7 @@ Function Format-BopExpandCommandAlias {
                     )
 
         # extract all Alias-Command  from Command Hashtable
-        # the key in the Hashtable is converted to lower cas to find alias case insensitive
+        # the key in the Hashtable is converted to lower case to find alias case insensitive
         $AliasHashLowerKeys = @{}
         ForEach ($Key in $BopCommandHashList.Keys) {
             # each value of a Key can contain an array of CommandInfo Objects

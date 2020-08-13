@@ -1,5 +1,18 @@
-# BeautyOfPower
+# BeautyOfPower (BoP)
 PowerShell Module to beautify sourcecode and to do refactoring on PowerShell sourcecode
+
+## Disclaimer of liability
+
+The Functions out of this Module will change (refactor) PowerShell sourcecode.
+The Authors of this Module have done great care to do no harm or damage to the processed sourcecode and its execution behavior or results.
+
+Best is to run the this Module in a Sandbox or an Sandbox like Virtual Machine to process, refactor or tidy PowerShell sourcecode.
+
+TO REVIEW THE CHANGES MADE TO THE SOURCECODE, BEFORE EXECUTING IT, IS ON YOUR OWN RESPONSIBILITY.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+YOU ACNOWLEDGE THAT IN NO EVENT THE AUTHORS OF THIS MODULE ARE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING OUT OF USE OF THE CODE OF THIS MODULE, INCLUDING, WITHOUT LIMITATION, ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+EVEN IF THE AUTHORS OF THIS MODULE HAVING KNOWLEDGE OF THE POSSIBILITY OF POTENTIAL LOSS OR DAMAGE.
 
 ## Usage
 
@@ -21,12 +34,14 @@ $Null = New-Item $OutFilePath -ItemType File -Force
 
 # Let the sourcecode parsed by the PowerShell parser and Tokenize it
 # parse File C:\PsCode\TestFile.ps1
-Get-BopTokenAndAst -Path $FileToBeParsed -IncludeNestedToken |
+# IT IS STRONGLY NOT RECOMENDED TO USE -IncludeNestedToken IN REFACTORING,
+# THIS WILL DAMAGE THE CODE!
+Get-BopTokenAndAst -Path $FileToBeParsed |
 # Convert .NET Tokens to custom, writeable Bop-Tokens
 ConvertTo-BopToken |
 # Chain the Formating functions to process the tokens
 #
-# Function which correct the casing of the Tokens
+# Functions which correct the casing of the Tokens
 Format-BopCasingTypeName |
 Format-BopCasingAttributeName |
 Format-BopCasingKeyword -ToLower |
@@ -38,6 +53,22 @@ Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
 Format-BopLCurly -LCurlyOnNewLine |
 # expanding Alias
 Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll |
+# Functions to process Command parameters
+# Command Parameter casing
+Format-BopCasingParameter | # alternativly use : Format-BopParameter -Format 'Casing'
+#
+# Parameter Formatting and Adding
+#
+# Shortened Command Parameter expanding
+Format-BopExpandParameterShort | # alternativly use : Format-BopParameter -Format 'ExpandShort'
+# Convert Command Parameter Alias to real Parameter Name
+Format-BopExpandParameterAlias  | # alternativly use : Format-BopParameter -Format 'ExpandAlias'
+# alternativly to the single functions, you can use : Format-BopParameter -Format 'All'
+#
+# Add ParameterName to Positional Parameter
+# (convert Positional Parameters to Named Parameters)
+Format-BopAddParameterName |
+#
 ForEach-Object {
 
     # Writing the processed Tokens one after the other to the output file and add spaces between the Tokens
@@ -61,9 +92,9 @@ So the first bunch of Formating functions of this Module are processing PowerShe
 
 ### Roadmap
 
-- a bunch of functions to place braces (and space between them).
-
 - replace aliases with the names who points the alias to (command alias and ParameterName alias or shorts)
+
+- a bunch of functions to place braces (and space between them).
 
 - write some functions to ident the code and to correct other whitespace.
 
@@ -104,6 +135,8 @@ The custom Token Object produced by this function are consumed by the formatting
 
 - Format-BopCasingKnownVariables (uses PascalCase by default!)
 
+- Format-BopCasingParameter ; alternativly use : Format-BopParameter -Format 'Casing'
+
 Watchout for additional Parameters a Function servers.
 This can be used to change casing behavior
 
@@ -114,6 +147,20 @@ See also: Capitalization guidelines
 
 - Format-BopLCurly (Kernighan & Ritchie Style and Allman style)
 
+#### Expanding Alias and shortnames
+
+- Format-BopExpandCommandAlias
+
+- Format-BopExpandParameterShort
+  (alternativly use : Format-BopParameter -Format 'ExpandShort')
+
+- Format-BopExpandParameterAlias
+  (alternativly use : Format-BopParameter -Format 'ExpandAlias')
+
+#### All in one Functions
+
+- Format-BopParameter -Format 'All'
+  (replacement for: Format-BopCasingParameter + Format-BopExpandParameterShort + Format-BopExpandParameterAlias)
 
 ## Insights
 

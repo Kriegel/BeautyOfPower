@@ -69,6 +69,8 @@ Function Format-BopParameter {
         Try {
 
             If( $BopToken.Psobject.TypeNames -notcontains 'BeautyOfPower.BopToken') {
+                Write-Host $BopToken.GetType().FullName -ForegroundColor 'Magenta'
+                Write-Host "$BopToken" -ForegroundColor 'Magenta'
                 Throw "$MyCommandName; Parameter -BopToken has wrong Type!"
             }
 

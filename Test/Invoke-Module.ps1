@@ -30,16 +30,16 @@ $Null = New-Item $TestFilePath -ItemType File -Force
 
 Get-BopTokenAndAst -Path $ParsePath |
 ConvertTo-BopToken |
-# Format-BopCasingTypeName |
-# Format-BopCasingAttributeName |
-# Format-BopCasingKeyword -ToLower |
-# Format-BopCasingCommandName |
-# Format-BopCasingParameter |
-# Format-BopLCurly -LCurlyOnNewLine|
-# Format-BopCasingTypeMemberName |
-# Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
-#Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll |
-# Format-BopParameter -Format 'All' |
+Format-BopCasingTypeName |
+Format-BopCasingAttributeName |
+Format-BopCasingKeyword -ToLower |
+Format-BopCasingCommandName |
+Format-BopCasingParameter |
+Format-BopLCurly -LCurlyOnNewLine|
+Format-BopCasingTypeMemberName |
+Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
+Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll |
+Format-BopParameter -Format 'All' -ErrorAction 'Stop'|
 Format-BopAddParameterName |
 ForEach-Object {
     $Token = $_

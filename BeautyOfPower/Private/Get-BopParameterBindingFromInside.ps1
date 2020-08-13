@@ -106,7 +106,7 @@
             }) -join ' '
 
             # Executing Temporary Parameter Proxy Function (PPF)
-            . ([Scriptblock]::Create("$PPFunctionName $CommandParameter"))
+            . ([Scriptblock]::Create("`$ErrorActionPreference = 'Stop' ; $PPFunctionName $CommandParameter"))
 
             # removing Temporary Parameter Proxy Function (PPF)
             If(Test-Path -Path "Function:$DirChar$PPFunctionName") {

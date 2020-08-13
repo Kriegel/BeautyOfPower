@@ -157,10 +157,10 @@ Function Format-BopAddParameterName {
 
                         $CommandName = $CommandAst.CommandElements[0].value
 
-                        Write-Host "ExcludeCommand: $($ExcludeCommand -join ', ')" -ForegroundColor 'Cyan'
+                        Write-Verbose "ExcludeCommand: $($ExcludeCommand -join ', ')"
 
                         If ($ExcludeCommand -icontains $CommandName) {
-                            Write-Verbose "$MyCommandName; Skipping Excluded Command $($Tok.Text)!" -Verbose
+                            Write-Verbose "$MyCommandName; Skipping Excluded Command $($Tok.Text)!"
                             Write-Output $Tok
                             Continue
                         }
@@ -195,10 +195,23 @@ Function Format-BopAddParameterName {
                                 Continue
                             }
 
-                            $BoundParameters = Get-BopParameterBindingFromInside -CommandInfo ($BopCommand.CommandInfo) -CommandAst $CommandAst
+                            Try {
+                                $WarnigMessage = $null
+                                $BoundParameters = Get-BopParameterBindingFromInside -CommandInfo ($BopCommand.CommandInfo) -CommandAst $CommandAst -ErrorAction 'Stop'
+                            }
+                            Catch {
+                                $WarnigMessage = $_.Exception.Message
+                                # TODO: Write better Error handling here!
+                                #Write-Error -ErrorRecord $_
+                            }
+
 
                             If($null -eq $BoundParameters) {
                                 Write-Warning "$MyCommandName; Can not find BoundParameters for Command Token $($Tok.Text) and CommandAst $($CommandAst.Extent.Text)"
+                                If(-not [String]::IsNullOrEmpty($WarnigMessage)) {
+                                    Write-Warning "MyCommandName; ErrorMessage $WarnigMessage"
+                                }
+
                                  # return the CommandName Token
                                 Write-Output $Tok
                                 Continue

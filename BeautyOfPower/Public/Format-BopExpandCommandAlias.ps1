@@ -134,7 +134,9 @@ Function Format-BopExpandCommandAlias {
                                     Write-Warning "$MyCommandName; Alias $Key is case sensitiv! Merging all Aliases to one!"
                                 }
                                 # merging lower alias names
-                                ($AliasHashLowerKeys[($Key.ToLower())]).Add(($BopCommandHashList[$Key]))
+                                # the value of the $BopCommandHashList and $AliasHashLowerKeys are [System.Collections.ArrayList]
+                                # so we have the Add() Method and MUST destroy the returned Index! Bug hunted !
+                                $null = ($AliasHashLowerKeys[($Key.ToLower())]).Add(($BopCommandHashList[$Key]))
                             }
                         }
                     }

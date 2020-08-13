@@ -1,18 +1,13 @@
 # BeautyOfPower (BoP)
 PowerShell Module to beautify sourcecode and to do refactoring on PowerShell sourcecode
 
-## Disclaimer of liability
 
 The Functions out of this Module will change (refactor) PowerShell sourcecode.
 The Authors of this Module have done great care to do no harm or damage to the processed sourcecode and its execution behavior or results.
 
 Best is to run the this Module in a Sandbox or an Sandbox like Virtual Machine to process, refactor or tidy PowerShell sourcecode.
 
-TO REVIEW THE CHANGES MADE TO THE SOURCECODE, BEFORE EXECUTING IT, IS ON YOUR OWN RESPONSIBILITY.
-
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
-YOU ACNOWLEDGE THAT IN NO EVENT THE AUTHORS OF THIS MODULE ARE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING OUT OF USE OF THE CODE OF THIS MODULE, INCLUDING, WITHOUT LIMITATION, ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-EVEN IF THE AUTHORS OF THIS MODULE HAVING KNOWLEDGE OF THE POSSIBILITY OF POTENTIAL LOSS OR DAMAGE.
+for Disclaimer of liability see License.
 
 ## Usage
 
@@ -39,6 +34,7 @@ $Null = New-Item $OutFilePath -ItemType File -Force
 Get-BopTokenAndAst -Path $FileToBeParsed |
 # Convert .NET Tokens to custom, writeable Bop-Tokens
 ConvertTo-BopToken |
+#
 # Chain the Formating functions to process the tokens
 #
 # Functions which correct the casing of the Tokens
@@ -96,7 +92,7 @@ So the first bunch of Formating functions of this Module are processing PowerShe
 
 ### Roadmap
 
-- replace aliases with the names who points the alias to (command alias and ParameterName alias or shorts)
+- Largely Done! :-) replace aliases with the names who points the alias to (command alias and ParameterName alias or shorts)
 
 - a bunch of functions to place braces (and space between them).
 
@@ -150,6 +146,10 @@ See also: Capitalization guidelines
 #### Brace placement
 
 - Format-BopLCurly (Kernighan & Ritchie Style and Allman style)
+
+#### Adding content (that was not there before)
+
+- Format-BopAddParameterName
 
 #### Expanding Alias and shortnames
 

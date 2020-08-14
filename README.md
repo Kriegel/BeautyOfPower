@@ -145,6 +145,8 @@ The custom Token Object produced by this function are consumed by the formatting
 
 - Format-BopCasingScopeModifier
 
+- Format-BopCasingOperator
+
 Watchout for additional Parameters a Function servers.
 This can be used to change casing behavior
 

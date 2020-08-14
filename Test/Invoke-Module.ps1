@@ -17,12 +17,17 @@ Import-Module "$PSScriptRoot\..\BeautyOfPower" -Force
 # $ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\PowerShell-Beautifier\Rename\ParameterAlias.ps1"
 # $ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\PowerShell-Beautifier\Rename\ParameterShort.ps1"
 # $ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\PowerShell-Beautifier\Rename\ParameterAll.ps1"
-$ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\PsScriptAnalyzer\AvoidPositionalParametersNoViolations.ps1"
-# $ParsePath = "$PSScriptRoot\Test\Files-ToParse\Bad-Scripts\Function-Complete-lowercase-LCurlyOnSameLine.ps1"
+# $ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\PsScriptAnalyzer\AvoidPositionalParametersNoViolations.ps1"
+# $ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\Function-Complete-lowercase-LCurlyOnSameLine.ps1"
+ $ParsePath = "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\PowerShell-Beautifier\Whitespace\WithinLine.ps1"
 
 
  # get Ast elements
  #(Get-BopTokenAndAst -Path $ParsePath).Ast.FindAll({$args[0] -is [System.Management.Automation.Language.CommandBaseAst]},$true)
+
+# Get-ChildItem -Path "$PSScriptRoot\..\Test\Files-ToParse\Bad-Scripts\PowerShell-Beautifier" -Filter "*.ps1" -Recurse |
+# ForEach-Object { $ParsePath = $_.FullName ; Write-Host "Processing File:`n$ParsePath" -ForegroundColor 'Cyan'
+
 
 $TestFilePath = 'C:\temp\Out-Tesfile.ps1'
 $Null = Remove-Item $TestFilePath -confirm:$False -ErrorAction 'ignore'
@@ -30,17 +35,17 @@ $Null = New-Item $TestFilePath -ItemType File -Force
 
 Get-BopTokenAndAst -Path $ParsePath |
 ConvertTo-BopToken |
-Format-BopCasingTypeName |
-Format-BopCasingAttributeName |
-Format-BopCasingKeyword -ToLower |
-Format-BopCasingCommandName |
-Format-BopCasingParameter |
-Format-BopLCurly -LCurlyOnNewLine|
-Format-BopCasingTypeMemberName |
-Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
-Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll |
-Format-BopParameter -Format 'All' -ErrorAction 'Stop'|
-Format-BopAddParameterName |
+# Format-BopCasingTypeName |
+# Format-BopCasingAttributeName |
+# Format-BopCasingKeyword -ToLower |
+# Format-BopCasingCommandName |
+# Format-BopCasingParameter |
+# Format-BopLCurly -LCurlyOnNewLine|
+# Format-BopCasingTypeMemberName |
+# Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
+# Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll |
+# Format-BopParameter -Format 'All' -ErrorAction 'Stop'|
+# Format-BopAddParameterName |
 ForEach-Object {
     $Token = $_
 
@@ -53,4 +58,6 @@ ForEach-Object {
     Add-Content -Path $TestFilePath -Value ((' ' * $Token.PrefixSpaces)  + $Token.Surrogate) -NoNewline
 }
 
-Notepad.exe $TestFilePath
+# Notepad.exe $TestFilePath
+
+#} # EndOf ForEach Get-ChildItem

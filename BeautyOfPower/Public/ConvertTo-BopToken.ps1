@@ -181,6 +181,7 @@ Function ConvertTo-BopToken {
                 If (($Tok.Kind -eq [System.Management.Automation.Language.TokenKind]::LCurly) -or ($Tok.Kind -eq [System.Management.Automation.Language.TokenKind]::AtCurly)){
 
                     # push my LCurly Array Index position to the stack
+                    Write-Verbose "Pushing LCurly or AtCurly $($Tok.Text)"
                     $CurlyStack.Push($IndexCounter)
 
                     $ResultObject.NestingDepth = $LCurlyNestingDepth
@@ -189,9 +190,10 @@ Function ConvertTo-BopToken {
 
                 }
 
-                If (($Tok.Kind -eq [System.Management.Automation.Language.TokenKind]::LParen) -or ($Tok.Kind -eq [System.Management.Automation.Language.TokenKind]::AtParen)){
+                If (($Tok.Kind -eq [System.Management.Automation.Language.TokenKind]::LParen) -or ($Tok.Kind -eq [System.Management.Automation.Language.TokenKind]::AtParen) -or ($Tok.Kind -eq [System.Management.Automation.Language.TokenKind]::DollarParen)){
 
                     # push my LParen Array Index position to the stack
+                    Write-Verbose "Pushing LParen or AtParen or DollarParen $($Tok.Text)"
                     $ParenStack.Push($IndexCounter)
 
                     $ResultObject.NestingDepth = $LParenNestingDepth
@@ -206,6 +208,7 @@ Function ConvertTo-BopToken {
                     $LCurlyNestingDepth--
 
                     # the Stack holds the correct Array Index to the counter piece
+                    Write-Verbose "Popping RCurly $($Tok.Text)"
                     [Uint32]$CounterPieceIndex = $CurlyStack.Pop()
 
                     # writing data to current Token
@@ -223,6 +226,7 @@ Function ConvertTo-BopToken {
                     $LParenNestingDepth--
 
                     # the Stack holds the correct Array Index to the counter piece
+                    Write-Verbose "Popping RParen $($Tok.Text)"
                     [Uint32]$CounterPieceIndex = $ParenStack.Pop()
 
                     $ResultObject.CounterPieceIndex = $CounterPieceIndex

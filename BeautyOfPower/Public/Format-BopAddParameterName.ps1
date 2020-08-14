@@ -159,8 +159,8 @@ Function Format-BopAddParameterName {
 
                         Write-Verbose "ExcludeCommand: $($ExcludeCommand -join ', ')"
 
-                        If ($ExcludeCommand -icontains $CommandName) {
-                            Write-Verbose "$MyCommandName; Skipping Excluded Command $($Tok.Text)!"
+                        If (($ExcludeCommand -icontains $CommandName) -or ($ExcludeCommand -icontains $Tok.Text) -or ($ExcludeCommand -icontains $Tok.Surrogate)) {
+                            Write-Verbose "$MyCommandName; Skipping Excluded Command $($Tok.Text) or CommandName ($CommandName) or Surrogate ($($Tok.Surrogate))  !"
                             Write-Output $Tok
                             Continue
                         }

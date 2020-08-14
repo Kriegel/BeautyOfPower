@@ -67,7 +67,10 @@ Function Format-BopAddParameterName {
             [PsObject]$BopToken,
 
             # List of CommandNames to not add Parameter Names to Positional Arguments
-            [String[]]$ExcludeCommand #TODO: Add Support for Alias and Short CommandNames
+            [String[]]$ExcludeCommand, #TODO: Add Support for Alias and Short CommandNames
+
+            # THIS FUNCTION IS EXPERIMENTAL! USE -Force TO USE IT REGARDLESS
+            [Switch]$Force
         )
 
         Begin {
@@ -133,6 +136,10 @@ Function Format-BopAddParameterName {
         }
 
         Process {
+
+            If(-not $Force.IsPresent) {
+                Write-Error "THIS FUNCTION NAMED '$MyCommandName' IS EXPERIMENTAL! USE PARAMETER -Force TO USE IT REGARDLESS" -ErrorAction 'Stop'
+            }
 
             Try {
 

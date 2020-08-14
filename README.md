@@ -7,6 +7,8 @@ The Authors of this Module have done great care to do no harm or damage to the p
 
 Best is to run the this Module in a Sandbox or an Sandbox like Virtual Machine to process, refactor or tidy PowerShell sourcecode.
 
+TO REVIEW THE CHANGES MADE TO THE SOURCECODE, BEFORE EXECUTING IT, IS ON YOUR OWN RESPONSIBILITY.
+
 for Disclaimer of liability see License.
 
 ## Usage
@@ -46,6 +48,8 @@ Format-BopCasingCommandName |
 Format-BopCasingParameter |
 Format-BopCasingTypeMemberName |
 Format-BopCasingKnownVariables -MSDefault -IncludeUnknownVars |
+Format-BopCasingScopeModifier |
+Format-BopCasingOperator -MixedCase |
 #
 # Function to define the place of the opening brace (LCurly) (here on their own line)
 #
@@ -58,16 +62,18 @@ Format-BopExpandCommandAlias -CaseSensitiv -IncludeAll |
 # Functions to process Command ParameterNames
 #
 # Command Parameter casing
-Format-BopCasingParameter | # alternativly use : Format-BopParameter -Format 'Casing'
+Format-BopCasingParameter | # this calls : Format-BopParameter -Format 'Casing'
 # Shortened Command Parameter expanding
-Format-BopExpandParameterShort | # alternativly use : Format-BopParameter -Format 'ExpandShort'
+Format-BopExpandParameterShort | # this calls : Format-BopParameter -Format 'ExpandShort'
 # Convert Command Parameter-Alias to real Parameter Name
-Format-BopExpandParameterAlias  | # alternativly use : Format-BopParameter -Format 'ExpandAlias'
-# alternativly to the single functions, you can use : Format-BopParameter -Format 'All'
+Format-BopExpandParameterAlias  | # this calls : Format-BopParameter -Format 'ExpandAlias'
+# For faster processing alternativly to the single functions, you can use :
+# Format-BopParameter -Format 'All'
 #
 # Add ParameterName to Positional Parameter
 # (convert Positional Parameters to Named Parameters)
-Format-BopAddParameterName |
+# THIS FUNCTION IS EXPERIMENTAL! USE -Force TO USE IT REGARDLESS
+Format-BopAddParameterName -Force|
 #
 ForEach-Object {
 
@@ -136,6 +142,8 @@ The custom Token Object produced by this function are consumed by the formatting
 - Format-BopCasingKnownVariables (uses PascalCase by default!)
 
 - Format-BopCasingParameter ; alternativly use : Format-BopParameter -Format 'Casing'
+
+- Format-BopCasingScopeModifier
 
 Watchout for additional Parameters a Function servers.
 This can be used to change casing behavior

@@ -110,10 +110,12 @@ Function ConvertTo-BopToken {
         # TODO: quotation marks are not processed yet
         $CurlyStack = New-Object System.Collections.Stack
         $ParenStack = New-Object System.Collections.Stack
+        $BracketStack = New-Object System.Collections.Stack
 
         # variables to track the nesting level of braces (TODO: or quotation marks)
         $LCurlyNestingDepth = 0
         $LParenNestingDepth = 0
+        $LBracketNestingDepth = 0
 
     }
 
@@ -170,7 +172,7 @@ Function ConvertTo-BopToken {
                     #Value = $Tok.Value
                     #VariablePath = $Tok.VariablePath
                     PrefixSpaces = $PrefixSpaces # Number of Spaces to put in front of this Token Text
-                    CounterPieceIndex = 0 # index position of (brace, quotation mark) counter piece
+                    CounterPieceIndex = -1 # index position of (brace, quotation mark) counter piece
                     NestingDepth = 0 # nesting depth of brace or quotation mark
                     PsTypeName = 'BeautyOfPower.BopToken'
                 })
@@ -199,6 +201,18 @@ Function ConvertTo-BopToken {
                     $ResultObject.NestingDepth = $LParenNestingDepth
 
                     $LParenNestingDepth++
+
+                }
+
+                If (($Tok.Kind -eq [System.Management.Automation.Language.TokenKind]::LBracket)) {
+
+                    # push my LBracket Array Index position to the stack
+                    Write-Verbose "Pushing LBracket $($Tok.Text)"
+                    $BracketStack.Push($IndexCounter)
+
+                    $ResultObject.NestingDepth = $LBracketNestingDepth
+
+                    $LBracketNestingDepth++
 
                 }
 
@@ -237,11 +251,28 @@ Function ConvertTo-BopToken {
 
                 }
 
-                $null = $ResultArray.Add($ResultObject)
+                If (($Tok.Kind -eq [System.Management.Automation.Language.TokenKind]::RBracket)) {
+
+                    $LBracketNestingDepth--
+
+                    # push my LBracket Array Index position to the stack
+                    Write-Verbose "Popping RBracket $($Tok.Text)"
+                    [Uint32]$CounterPieceIndex = $BracketStack.Pop()
+
+                    $ResultObject.CounterPieceIndex = $CounterPieceIndex
+                    $ResultObject.NestingDepth = $LBracketNestingDepth
+
+                    # writing data to predecessor counter piece Token
+                    ($ResultArray[($CounterPieceIndex)]).CounterPieceIndex = $IndexCounter
+
+                }
+
+                $IndexCounter = $ResultArray.Add($ResultObject)
 
                 $EndOffsetPreceding = $Tok.Extent.EndOffset
 
                 $IndexCounter++
+
             }
         }
         Catch {

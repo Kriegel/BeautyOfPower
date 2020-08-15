@@ -1,5 +1,6 @@
 # BeautyOfPower (BoP)
-PowerShell Module to beautify sourcecode and to do refactoring on PowerShell sourcecode
+
+**PowerShell Module to format PowerShell script text (sourcecode) to beautify PowerShell sourcecode and to do refactoring on PowerShell sourcecode**
 
 
 The Functions out of this Module will change (refactor) PowerShell sourcecode.
@@ -10,6 +11,10 @@ Best is to run the this Module in a Sandbox or an Sandbox like Virtual Machine t
 TO REVIEW THE CHANGES MADE TO THE SOURCECODE, BEFORE EXECUTING IT, IS ON YOUR OWN RESPONSIBILITY.
 
 for Disclaimer of liability see License.
+
+**Alternativly** to this Module use the Module **PSScriptAnalyzer** and his Cmdlet **Invoke-Formatter**
+<https://github.com/PowerShell/PSScriptAnalyzer>
+<sub>(The reason I devlop my own Module here is that PSScriptAnalyzer is written in C# so I can not contribute there and Invoke-Fomatter seems to be an [unloved Kid](https://github.com/PowerShell/PSScriptAnalyzer/issues/775) and shows no development Progress. :-(  )</sub>
 
 ## Usage
 
@@ -191,6 +196,10 @@ Windows PowerShell Language Specification Version 3.0
 
 Powershell Practice and Style recomendations
 <https://poshcode.gitbooks.io/powershell-practice-and-style/>
+
+Also useful for general PowerShell code:
+DSC Resource Style Guidelines & Best Practices
+<https://github.com/PowerShell/DscResources/blob/master/StyleGuidelines.md>
 
 Known Issues for PowerShell 6.0
 Case-sensitivity in PowerShell etc. ...
